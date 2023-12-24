@@ -1,0 +1,33 @@
+syntax="proto3";
+
+option go_package="pb_todolist/";
+
+message UserRequest {
+    string NickName=1;
+    string UserName=2;
+    string Passwd=3;
+    string PasswdConfirm=4;
+}
+
+message UserResponse {
+    int64 UserID=1;
+    string NickName=2;
+    string UserName=3;
+}
+
+message UserDetailResponse {
+    UserResponse UserDetail=1;
+    int64 Code=2;
+}
+
+message UserCommonResposne {
+    int64 Code=1;
+    string Meg=2;
+    string Data=3;
+}
+
+service UserService {
+    rpc UserLogin(UserRequest) returns (UserDetailResponse);
+    rpc UserRegister(UserRequest) returns (UserCommonResposne);
+    rpc UserLogout(UserRequest) returns (UserCommonResposne);
+}

@@ -1,0 +1,41 @@
+syntax="proto3";
+
+option go_package = "pb_todolist/";
+
+message TaskModel {
+    int64 TaskID=1;
+    int64 UserID=2;
+    int64 Status=3;
+    string Title=4;
+    string Content=5;
+    int64 StartTime=6;
+    int64 EndTime=7;
+}
+
+message TaskRequest {
+    int64 TaskID=1;
+    int64 UserID=2;
+    int64 Status=3;
+    string Title=4;
+    string Content=5;
+    int64 StartTime=6;
+    int64 EndTime=7;
+}
+
+message TasksDetailResponse {
+    repeated TaskModel TasksDetails=1;
+    int64 Code=2;
+}
+
+message TaskCommonResponse {
+    int64 Code=1;
+    string Msg=2;
+    string Data=3;
+}
+
+service TaskService {
+    rpc TaskCreate(TaskRequest) returns (TaskCommonResponse);
+    rpc TaskUpdate(TaskRequest) returns (TaskCommonResponse);
+    rpc TaskShow(TaskRequest) returns(TasksDetailResponse);
+    rpc TaskDelete(TaskRequest) returns(TaskCommonResponse);
+}
